@@ -9,6 +9,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.allOf;
 
+import android.view.View;
+
+import org.hamcrest.Matcher;
+
 import java.util.concurrent.TimeUnit;
 
 public class EspressoTestHelper {
@@ -19,13 +23,14 @@ public class EspressoTestHelper {
 
     static void selectNavigationDrawerItem(String itemName) {
         onView(withText(itemName))
+                .check(matches(isDisplayed()))
                 .perform(click());
     }
 
-    static void checkTextDisplayed(int viewId, String text) {
+    public static void checkTextDisplayed(int viewId, String expectedText) {
         onView(withId(viewId))
                 .check(matches(isDisplayed()))
-                .check(matches(withText(text)));
+                .check(matches(withText(expectedText)));
     }
 
     static void openNavigationDrawer() {
@@ -41,4 +46,15 @@ public class EspressoTestHelper {
         onView(withId(R.id.nav_view))
                 .check(matches(isDisplayed()));
     }
+
+    public static void openOverflowMenuAndClickSettings() {
+        onView(withContentDescription("More options"))
+                .check(matches(isDisplayed()))
+                .perform(click());
+
+        onView(allOf(withId(androidx.recyclerview.R.id.title), withText("Settings")))
+                .check(matches(isDisplayed()))
+                .perform(click());
+    }
+
 }

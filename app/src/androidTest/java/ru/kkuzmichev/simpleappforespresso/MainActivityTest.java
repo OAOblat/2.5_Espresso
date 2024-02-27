@@ -1,5 +1,6 @@
 package ru.kkuzmichev.simpleappforespresso;
 
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static ru.kkuzmichev.simpleappforespresso.EspressoTestHelper.checkNavigationDrawerItemDisplayed;
 import static ru.kkuzmichev.simpleappforespresso.EspressoTestHelper.checkTextDisplayed;
 import static ru.kkuzmichev.simpleappforespresso.EspressoTestHelper.openNavigationDrawer;
